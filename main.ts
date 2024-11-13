@@ -1,3 +1,6 @@
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(car)
+})
 function SpawnRoadCars () {
     car = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -22,6 +25,10 @@ function SpawnRoadCars () {
     car.setVelocity(0, 20)
     car.setFlag(SpriteFlag.AutoDestroy, true)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    game.gameOver(false)
+    music.play(music.createSoundEffect(WaveShape.Square, 200, 1, 255, 70, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.InBackground)
+})
 let car: Sprite = null
 let RoadCars: Image[] = []
 RoadCars = [img`
@@ -76,7 +83,7 @@ RoadCars = [img`
     . . . f f a a a a a a a a f f . 
     . . . . f f . . . . . . f f . . 
     `]
-let spawninterval = 1000
+let spawninterval = 2000
 let mySprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -95,7 +102,7 @@ let mySprite = sprites.create(img`
     . . c b d d d d d 5 5 5 b b . . 
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
-mySprite.setPosition(160, 100)
+mySprite.setPosition(80, 100)
 controller.moveSprite(mySprite, 100, 0)
 scene.setBackgroundImage(img`
     7777777777777777777711111bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb111117777777777777777777
